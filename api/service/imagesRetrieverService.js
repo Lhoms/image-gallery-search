@@ -1,3 +1,4 @@
+require('dotenv').config();
 const rest = require('./restService');
 const imageRepository = require('../repository/imageRepository');
 
@@ -13,6 +14,14 @@ module.exports.load = async () => {
   } catch (e) {
     console.error(e);
   }
+};
+
+module.exports.setupLoadAndRefresh = () => {
+  const time = process.env.RELOAD_TIME_SEC;
+
+  setTimeout(this.load, 0);
+  setInterval(this.load, time * 1000);
+  console.log(`Cache refresh configured each: ${time} seconds`);
 };
 
 async function retrieveAllCropped () {

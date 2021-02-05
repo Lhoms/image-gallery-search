@@ -45,12 +45,12 @@ async function retrieveAllCropped () {
 }
 
 async function retrieveCroppedData (page) {
-  const { data } = await rest.get(`${images_url}?page=${page}`);
+  const { data } = await rest.retryGet(`${images_url}?page=${page}`);
   return data;
 }
 
 async function retrieveCroppedPictures (page) {
-  const { data } = await rest.get(`${images_url}?page=${page}`);
+  const { data } = await rest.retryGet(`${images_url}?page=${page}`);
   return data.pictures;
 }
 
@@ -60,6 +60,6 @@ async function retrieveImagesFullData (ids) {
 }
 
 async function retrieveImageFullData (id) {
-  const { data } = await rest.get(`${images_url}/${id}`);
+  const { data } = await rest.retryGet(`${images_url}/${id}`);
   return data;
 }

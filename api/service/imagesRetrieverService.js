@@ -1,5 +1,5 @@
 const rest = require('./restService');
-const db = require('../repository/db');
+const imageRepository = require('../repository/imageRepository');
 
 const images_url = 'http://interview.agileengine.com/images';
 
@@ -7,7 +7,9 @@ module.exports.load = async () => {
   try {
     const allPicturesCropped = await retrieveAllCropped();
     const ids = allPicturesCropped.map(x => x.id);
-    return await retrieveImagesFullData(ids);
+    const imagesArray = await retrieveImagesFullData(ids);
+    await imageRepository.save(imagesArray);
+    console.log('Cache Loaded!');
   } catch (e) {
     console.error(e);
   }

@@ -1,10 +1,10 @@
 const ErrorHandler = require('../utils/ErrorHandler');
-const imageRepository = require('../repository/imageRepository');
+const searchService = require('../service/searchService');
 
 module.exports.search = async (req, res) => {
   try {
     const {searchTerm} = req.params;
-    const result = await imageRepository.search(searchTerm);
+    const result = await searchService.search(searchTerm);
     await res.json(result);
   } catch (e) {
     ErrorHandler.handle(res, e);

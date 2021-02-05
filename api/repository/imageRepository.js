@@ -3,25 +3,18 @@ const db = require('./db');
 
 let available = false;
 
-module.exports.load = async () => {
+module.exports.save = async (imagesArray) => {
   available = false;
-  const imagesArray = await imageRetrieverService.load();
   db.save(imagesArray);
   available = true;
-  console.log('Cache Loaded!');
 };
 
-module.exports.search = async (word) => {
-  if(available) {
-    const { data } = await db.get();
-    return data.filter(x => filterCriteria(word, x));
+module.exports.get = async () => {
+  if (available) {
+    const {data} = await db.get();
+    return data;
   } else {
     throw new Error('Images repository not available. Try again.')
   }
 };
-
-const filterCriteria = () => {
-  // TODO
-};
-
 

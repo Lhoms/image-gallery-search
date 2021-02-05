@@ -1,14 +1,13 @@
 const rest = require('./restService');
-const db = require('./db');
+const db = require('../repository/db');
 
 const images_url = 'http://interview.agileengine.com/images';
 
-module.exports.retrieve = async () => {
+module.exports.load = async () => {
   try {
     const allPicturesCropped = await retrieveAllCropped();
     const ids = allPicturesCropped.map(x => x.id);
-    const imagesArray = await retrieveImagesFullData(ids);
-    db.save(imagesArray);
+    return await retrieveImagesFullData(ids);
   } catch (e) {
     console.error(e);
   }

@@ -8,6 +8,6 @@ module.exports.clear = () => {
   db.data = {};
 };
 
-module.exports.get = () => {
+module.exports.get = async () => {
   return db;
 };

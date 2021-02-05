@@ -1,10 +1,8 @@
 const express = require('express');
+const { search } = require('../api/controller/searchController');
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.status(200).json('Hello World! :D');
-});
+router.get('/search/:searchTerm', search);
 
 module.exports = router;
